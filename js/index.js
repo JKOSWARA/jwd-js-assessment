@@ -37,13 +37,24 @@ window.addEventListener('DOMContentLoaded', () => {
     {
       q: 'Which is the largest ocean on Earth?',
       o: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
-      a: 3,
+      a: 3,// array index 3 correct
     },
     {
       q: 'What is the capital of Australia',
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
-      a: 1,
+      a: 1, //array index 1 correct
     },
+    {
+      q: 'What is the largest country in the world',
+      o: ['Russia', 'Australia', 'China', 'USA'],
+      a: 0, // extra question 
+    },
+    {
+      q : 'What is the biggest Animal in the world',
+      o : ['Elephant','Whale', 'Giraffe','Bear'],
+      a: 1, // extra question
+    }
+
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -57,6 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <li class="list-group-item" id="li_${index}_1"><input type="radio" name="radio${index}" id="radio_${index}_1"> ${quizItem.o[1]}</li>
                     <li class="list-group-item"  id="li_${index}_2"><input type="radio" name="radio${index}" id="radio_${index}_2"> ${quizItem.o[2]}</li>
                     <li class="list-group-item"  id="li_${index}_3"><input type="radio" name="radio${index}" id="radio_${index}_3"> ${quizItem.o[3]}</li>
+                    
                     </ul>
                     <div>&nbsp;</div>`;
       quizWrap.innerHTML = quizDisplay;
@@ -76,15 +88,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          // document.getElementById(`li_${index}_${i}`).style.backgroundColor = "lightgreen";
+          liElement.style.backgroundColor = "Lightgreen";
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
-        }
+          if (quizItem.a == i) {
+            score += 1;
+          }
+          
+            
+          }
+            
+        
       }
+        document.getElementById("score").innerHTML = (  "you got" + score +   "/" + 4)
+        
+
     });
+
+
+
   };
 
   // call the displayQuiz function
+  
   displayQuiz();
+  
+  document
+    .getElementById("btnSubmit")
+    .addEventListener("click", calculateScore);
+
+// 4. Reload the page when the reset button is clicked (hint: search window.location)
+
+btnReset.addEventListener("click", () => {
+  location.reload();
+  
+});
+
+
 });
